@@ -28,13 +28,16 @@ const controller = {
         });
     },
     apiShowGroups: async function(req, res) {
-        let result = await model.bringGroupMatches({include: [ "jugadorUno","jugadorDos","fecha" ]},req.params.tier);
-        // console.log(result);
+        let result = await model.bringGroupMatches({include: [ "jugadorUno","jugadorDos","fecha" ], raw: true, nest: true},req.params.tier);
+        console.log(result.length);
         res.status(200).send(result)
     },
     apiInitGroups: async function(req, res) {
-        let data =await model.createGroupMatches(req.params.tier);
-        console.log(data); 
+        await model.createGroupMatches(1);
+        await model.createGroupMatches(2);
+        await model.createGroupMatches(3);
+        await model.createGroupMatches(4);
+        // console.log(data); 
         // res.send(data);
         res.redirect('/');
     },

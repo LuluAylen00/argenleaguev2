@@ -3,9 +3,11 @@ verifyAdmin()
 async function loadGroupsPhase(tier){
     let groups = await fetch("/api/groups/"+tier);
     groups = await groups.json();
+    console.log(groups);
 
     let groupPhase = await fetch("/api/group-phase/"+tier);
     groupPhase = await groupPhase.json();
+    console.log(tier,groupPhase);
 
     // console.log(groups);
     let divCont = document.getElementById("groups");
@@ -83,6 +85,7 @@ async function loadGroupsPhase(tier){
 
             // console.log(getMatches(groupFromPhase, 1));
             // console.log(groupFromPhase);
+            console.log(groupFromPhase);
             groupFromPhase[i].forEach((gro,f) => {
                 let eachJCont = document.createElement("div");
                 eachJCont.classList.add("eachJCont")
@@ -152,7 +155,10 @@ async function loadGroupsPhase(tier){
                         t.appendChild(caption)
                     }
     
+                    // console.log(gro);
                     gro.forEach((gr,k) => {
+                            // console.log(gr);
+
                             let tr = document.createElement("tr");
                             
                             let td1 = document.createElement("td");

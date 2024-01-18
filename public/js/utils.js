@@ -343,23 +343,29 @@ function sortTable(table) {
   }
 
 function getMatches(matches) {
-    let data = [
-        matches.filter((p,i) => {
-            return (i+1) <= (1 * 5) && (i+1) > ((1-1) * 5)
-        }),
-        matches.filter((p,i) => {
-            return (i+1) <= (2 * 5) && (i+1) > ((2-1) * 5)
-        }),
-        matches.filter((p,i) => {
-            return (i+1) <= (3 * 5) && (i+1) > ((3-1) * 5)
-        }),
-        matches.filter((p,i) => {
-            return (i+1) <= (4 * 5) && (i+1) > ((4-1) * 5)
-        })
+    console.log(matches);
+    // Array de tiers
+        // Array de fechas
+            // Array de matches
+    let fechas = [
+        [matches[0],matches[1],matches[2],matches[3],matches[4]],
+        [matches[0+(5*1)],matches[1+(5*1)],matches[2+(5*1)],matches[3+(5*1)],matches[4+(5*1)]],
+        [matches[0+(5*2)],matches[1+(5*2)],matches[2+(5*2)],matches[3+(5*2)],matches[4+(5*2)]],
+        [matches[0+(5*3)],matches[1+(5*3)],matches[2+(5*3)],matches[3+(5*3)],matches[4+(5*3)]],
     ]
+    console.log(fechas);
+    let data = fechas.map((partidasDelTier) => {
+        return [
+            [...partidasDelTier.filter((ti) => ti.fechaId == 1)],
+            [...partidasDelTier.filter((ti) => ti.fechaId == 2)],
+            [...partidasDelTier.filter((ti) => ti.fechaId == 3)],
+        ]
+    })
+
+    console.log(data);
     
-    return data.map(g => {
+    return data/* .map(g => {
         let acc = [[g[0],g[1]],[g[2],g[3]],[g[4]]];
         return acc
-    })
+    }) */
 }

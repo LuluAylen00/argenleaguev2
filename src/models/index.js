@@ -45,9 +45,9 @@ const model = {
         // function validGroup(g) {
         //     return g == 1 ? g == 1 : g == 2 ? g == 2 : g == 3 ? g == 3 : g == 4 ? g == 4 : false;
         // }
-        console.log(playerId, group);
+        // console.log(playerId, group);
         let player = await db.Jugador.findByPk(playerId);
-        console.log(playerId,group);
+        // console.log(playerId,group);
         if (group || group == null) {
             // console.log(model.findByGroup(group,player.categoriaId));
             let jugadoresDelGrupo = await db.Jugador.findAll({where: {
@@ -71,7 +71,10 @@ const model = {
         }
     },
     bringGroupMatches: async (params, tier)=> {
-        let asd = await db.Partida.findAll(params).then((d) => d.filter((p,i) => (i+1) <= (tier * 20) && (i+1) > ((tier-1) * 20)))
+        let asd = await db.Partida.findAll(params).then((d) => d.filter((p,i) => {
+            return p.categoriaId == tier/* (i+1) <= (tier * 20) && (i+1) > ((tier-1) * 20) */
+        }))
+        console.log(asd.length);
         // console.log(asd);
         return asd
     },
@@ -85,7 +88,7 @@ const model = {
         await db.Partida.update({ganador: winner},{where: {id: matchId}})
         let data = await db.Partida.findOne({where: {id: matchId}});
         let players = [data.jugadorUnoId, data.jugadorDosId]
-        console.log(winner, winner != null);
+        // console.log(winner, winner != null);
         switch (matchId % 5) {
             case 1:
                 await db.Partida.update({jugadorUnoId: winner != null ? players[winner] : null},{where: {id: matchId+2}});
@@ -390,7 +393,7 @@ const model = {
                 }
             })
         }
-        console.log(orden);
+        // console.log(orden);
         return data2
     },
     updateNick: async function (id, nick){

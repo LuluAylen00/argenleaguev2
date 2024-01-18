@@ -468,7 +468,37 @@ select#tier-selector {
 body div:where(.swal2-container) div:where(.swal2-popup) {
   border-radius: 2px;
   background: #545454;
-  color: #bb9f59;
+  color: #1ed5ff;
   font-size: 1rem;
   font-family: "FontAwesome";
+}
+
+body div:where(.swal2-container) button:where(.swal2-styled).swal2-styled {
+  background-image: url(/img/Fondo_Argenleague.png);
+  background-size: 100% 100%;
+  color: #bb9f59;
+}
+
+body div:where(.swal2-container) h2:where(.swal2-title) {
+  font-size: 1.5rem;
+}
+
+body div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm{
+  background-color: inherit;
+  box-shadow: none;
+  border: unset;
+}
+
+body div:where(.swal2-container).swal2-center>.swal2-popup {
+  background-image: url(/img/Fondo_Argenleague.png);
+    background-size: 100% 100%;
+}
+
+body div:where(.swal2-container).swal2-backdrop-show {
+  background-color: rgba(0,0,0,0.7);
+}
+
+#finalPhase {
+  color: gray!important;
+  cursor: default;
 }

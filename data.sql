@@ -1,7 +1,7 @@
 
-DROP DATABASE IF EXISTS `argenleague`;
-CREATE DATABASE `argenleague`;
-USE `argenleague`;
+DROP DATABASE IF EXISTS `argenleaguev2`;
+CREATE DATABASE `argenleaguev2`;
+USE `argenleaguev2`;
 
 DROP TABLE IF EXISTS `partidasFinales`;
 DROP TABLE IF EXISTS `partidas`;

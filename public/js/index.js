@@ -180,10 +180,11 @@ function loadSeedingGroups(players, tier){
 
                         if (fetching.status == 200) {
                             // Swal.close();
-                            Swal.fire({
-                                title: `${p.nick} ahora es parte del grupo ${info}`,
-                                confirmButtonText: 'Ok',
-                            })
+                            // Swal.fire({
+                            //     title: `${p.nick} ahora es parte del grupo ${info}`,
+                            //     confirmButtonText: 'Ok',
+                            // })
+                            Swal.close();
                             // await updateGroups(tier)
                             setPage();
                         } else if (fetching.status == 400) {
@@ -204,7 +205,7 @@ function loadSeedingGroups(players, tier){
                         let buttonA = document.createElement("button");
 
                         buttonA.setAttribute("type","button");
-                        buttonA.setAttribute("class","swal2-confirm swal2-styled swal2-modified button-"+grupo);
+                        buttonA.setAttribute("class","swal2-styled swal2-modified button-"+grupo);
                         buttonA.setAttribute("aria-label","");
                         buttonA.setAttribute("style","display: inline-block;");
                         buttonA.innerHTML = grupo;
@@ -215,11 +216,11 @@ function loadSeedingGroups(players, tier){
 
                     Swal.fire({
                         title: `Introduce el nuevo grupo para ${p.nick}`,
-                        input: 'text',
-                        allowOutsideClick: false,
-                        inputAttributes: {
-                          autocapitalize: 'off'
-                        },
+                        // input: 'text',
+                        allowOutsideClick: true,
+                        // inputAttributes: {
+                        //   autocapitalize: 'off'
+                        // },
                         // showCancelButton: true,
                         // cancelButtonText: "Cancelar",
                         showCancelButton: true,
@@ -235,7 +236,8 @@ function loadSeedingGroups(players, tier){
                                     })
                                 })
                         },
-                        confirmButtonText: 'Aceptar',
+                        showConfirmButton: false,
+                        // confirmButtonText: 'Aceptar',
                         showLoaderOnConfirm: false,
                         
                     })
@@ -305,7 +307,8 @@ async function loadGroups(tier){
                                         id: p.id
                                     })
                                 })
-                                Swal.fire(`${p.nick} ahora está sin grupo`, '', 'success')
+                                // Swal.fire(`${p.nick} ahora está sin grupo`, '', 'success')
+                                Swal.close();
                                 await updateGroups(tier);
                             }
                           })
@@ -450,7 +453,7 @@ document.getElementById("groupPhase").addEventListener("click", ()=>{
     insertParam('p', "groups")
     setPage();
 })
-document.getElementById("finalPhase").addEventListener("click", ()=>{
-    insertParam('p', "final")
-    setPage();
-})
+// document.getElementById("finalPhase").addEventListener("click", ()=>{
+//     insertParam('p', "final")
+//     setPage();
+// })
