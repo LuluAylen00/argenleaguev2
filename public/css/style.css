@@ -1,0 +1,447 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url(../img/Fondo_Argenleague_sin_marco.png);
+  background-size: cover;
+}
+
+body header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 6%;
+  /* background-color: #13304c; */
+  height: 15vh;
+}
+
+div#groups .table thead th, div#left-bar .table .thead-dark th {
+  border-bottom: none !important;
+  color: #bb9f59;
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 600;
+    font-size: larger;
+    padding: 12px 0px;
+    vertical-align: middle;
+}
+
+#seed-table tbody {
+  color:snow;
+}
+
+#seed-table tbody .bold{
+  font-weight: bold;
+}
+
+div#groups .table td, div#groups .table th {
+  border-top: none !important;
+  color: snow;
+  padding: 7px;
+}
+div#seeding-groups .table td, div#seeding-groups .table th {
+  border-top: none !important;
+  color: snow;
+}
+
+div#left-bar .table td, div#left-bar .table th {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+
+.navbar-nav {
+  font-size: 18px;
+}
+
+body header img {
+  width: 75px;
+  filter: drop-shadow(1px 1px 4px rgb(226, 226, 226));
+}
+
+body main {
+  display: flex;
+  height: 85vh;
+  /* background-color: #4a7ba1; */
+}
+
+header .navbar-nav  a{
+  color: #1ed5ff!important;
+    font-weight: 1000;
+    font-family: 'Font Awesome 6 Free';
+    font-size: larger;
+    margin: 0 20px;
+}
+
+.table-cont {
+  /* background-color: white; */
+}
+
+div#left-bar {
+  width: 25vw;
+  height: 95%;
+  overflow-y: auto;
+  overflow-x: visible;
+  margin: 1%;
+}
+
+#inv {
+  display: none;
+}
+
+body tbody tr.player.asd.selected-player {
+  background-color: rgba(146, 146, 146, 0.3);
+}
+
+div#main {
+    width: 75vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+}
+
+div#cont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 50%;
+}
+
+#main div#groups {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 41%;
+  background-image: url(/img/Fondo_Argenleague.png);
+  background-size: 100% 100%;
+}
+
+#main div#groups div {
+  width: 24%;
+}
+
+#seeding-groups {
+  width: 100%;
+  display: flex;
+  /* justify-content: space-around; */
+  overflow-x: auto;
+}
+
+#seeding-groups table {
+  margin: 5px;
+  outline: solid 1px rgb(75 75 75 / 30%);
+}
+
+#seeding-groups table caption{
+  padding-left: 15px;
+}
+
+body td, body th {
+  text-align: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+body .table td, body .table th {
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+
+body .btn-success {
+  padding: 3px 5px;
+  background-color: #bb9f59;
+    border-color: #bb9f59;
+}
+
+body .btn-success:hover {
+  background-color: #1ed5ff;
+    border-color: #1ed5ff;
+}
+
+#seeding-groups-h3, #seed-table-header {
+  position: relative;
+  color: #1ed5ff;
+  font-family: 'FontAwesome';
+  font-size: larger;
+}
+
+#seeding-groups .table-info {
+  background-color: rgba(0, 0, 0,0.6);
+}
+
+#seeding-groups .table-info th {
+  color: #bb9f59!important;
+}
+
+#seeding-groups .table-info th, #seeding-groups .table-info td{
+  background-color: unset;
+  font-weight: bold;
+}
+
+#seeding-groups tr.selected-player {
+  font-weight: bold;
+}
+
+.fa-circle-info {
+  font-size: 18px;
+  color: rgba(120, 120, 120, 0.5);
+}
+
+.seeding-info {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  bottom: 100%;
+  width: 50vw;
+  /* height: 50vh; */
+  transition: all 0.3s ease-in-out;
+  padding: 15px;
+  font-size: 16px;
+}
+
+.fa-circle-info:hover ~ .seeding-info {
+  opacity: 1;
+  z-index: 2;
+  border-radius: 15px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0,0.2);
+  border: 1px solid #13304c;
+}
+
+#main-groups {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
+
+/* #main-groups .top-part div#groups div {
+  border: solid 1px rgb(75 75 75 / 30%);
+  width: 23%;
+} */
+
+.group-cont {
+  width: 23%;
+}
+
+#main-groups div#groups {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#main-groups #groups .top-part, #main-groups #groups .bot-part {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#main-groups #groups .bot-part {
+  padding-bottom: 5px;
+}
+
+div.bot-part div.eachJCont {
+  width: 100%;
+}
+
+div.bot-part table {
+  width: 100%;
+  margin: 5px;
+}
+
+div.bot-part h3 {
+  font-size: 18px;
+  text-align: center;
+  padding-top: 7px;
+  margin-bottom: 3px;
+}
+
+div.bot-part td {
+  width:40%;
+  font-size: 0.95rem;
+}
+
+div.bot-part caption {
+  caption-side: top;
+  padding: 6px 0 3px 10px;
+  font-size: 13px;
+}
+
+.qualified, .winner {
+  background-color: rgba(72, 235, 86, 0.3);
+}
+
+.disqualified, .loser {
+  background-color: rgba(235, 72, 72, 0.3);
+}
+
+.center {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wave {
+  width: 5px;
+  height: 100px;
+  background: linear-gradient(45deg, cyan, #fff);
+  margin: 10px;
+  animation: wave 1s linear infinite;
+  border-radius: 20px;
+}
+.wave:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.wave:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.wave:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.wave:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.wave:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.wave:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.wave:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.wave:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.wave:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+#update-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#update-div input {
+  width: 80%;
+}
+
+#update-div i.fa-times-circle {
+  color: red;
+}
+
+#update-div i.fa-check-square {
+  color: green;
+}
+
+div#loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+svg {
+  width: 40%;
+}
+
+#cube {
+  transform-origin: 50% 50%;
+}
+
+#final-user-div {
+  display: flex;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  flex-direction: column-reverse;
+}
+
+#final-user-div a.btn-primary {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  align-self: end;
+  justify-content: center;
+}
+
+.bracket {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.team {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.vs {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 50px;
+}
+
+.vs::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid black;
+  margin: 10px auto;
+}
+
+td:first-child .team {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+td:last-child .team {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+td:last-child .vs {
+  display: none;
+}
+
+.titulo-dorado {
+  color: #bb9f59;
+}
+
+.titulo-azul {
+  color: #1ed5ff;
+}
+
+div#left-bar .table .thead-dark th {
+  background-color: unset;
+}
+
+select#tier-selector {
+  color: snow;
+  background-color: black;
+  border: 3px solid #bb9f59;
+}
