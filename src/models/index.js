@@ -25,7 +25,11 @@ const model = {
         //     string += acc.toString() +";"
         // }
         // console.log(string);
-        return db.Jugador.findAll({where: {categoriaId:tier}}).then((d)=>{
+        return db.Jugador.findAll({
+            where: {categoriaId:tier},
+            raw: true,
+            nest: true,
+        }).then((d)=>{
             // console.log(d);
             return d
         })
@@ -59,6 +63,7 @@ const model = {
                 
                 // model.createGroupMatches(player.categoriaId, null);
                 // save(data, filePath);
+                model.createGroupMatches(player.categoriaId);
                 return 200;
             }
         } else {
@@ -154,10 +159,66 @@ const model = {
         model.createGroupMatches(d,tier, matchId/* , matches */);
         return;
     },
-    createGroupMatches: async () => {
+    createGroupMatches: async (tier) => {
         // console.log(matchId);
-        let h = model.bringGroupMatches({include: [ "jugadorUno","jugadorDos","fecha" ]});
-        let data = await db.Partida.findAll({include: [ "jugadorUno","jugadorDos","fecha" ]})
+        // let h = await model.bringGroupMatches({include: [ "jugadorUno","jugadorDos","fecha" ]});
+        // console.log(h);
+        let data = await db.Partida.findAll({
+            where: {
+                categoriaId: tier,
+                // fechaId: 1
+            },
+            include: [ "jugadorUno","jugadorDos","fecha" ],
+            // raw: true,
+            // nest: true,
+        });
+        // console.log(data[0]);
+        for (let i = 0; i < data.length; i++) {
+            const match = data[i];
+            // console.log(Object.keys(data[i]));
+            data[i].update({
+                jugadorUnoId: null,
+                jugadorDosId: null,
+                ganador: null,
+                jugadorUno: undefined,
+                jugadorDos: undefined
+            })
+            // console.log(match.id, match.fechaId, match.categoriaId, match.ganador);
+            
+        }
+        let dataASetear = data.filter((match) => match.fechaId == 1);
+        let grupos = await model.findAllGroups(tier);
+        
+        Object.values(grupos).forEach((g,i) => {
+            if (dataASetear[i*2]) {
+                dataASetear[i*2].update({
+                    jugadorUnoId: g[0] ? g[0].id : null,
+                    jugadorDosId: g[2] ? g[2].id : null,
+                })
+            }
+
+            if (dataASetear[(i*2)+1]) {
+                dataASetear[(i*2)+1].update({
+                    jugadorUnoId: g[1] ? g[1].id : null,
+                    jugadorDosId: g[3] ? g[3].id : null,
+                })
+            }
+            // 13
+            // 24
+            // console.log(g);
+        })
+        // let dataAResetear = await db.Partida.findAll({
+        //     where: {
+        //         categoriaId: tier,
+        //         fechaId: {
+        //             $notIn: [1]
+        //         }
+        //     },
+        //     include: [ "jugadorUno","jugadorDos","fecha" ],
+        //     raw: true,
+        //     nest: true,
+        // });
+
         // console.log(h);
         // let groupsToModify = matchesData
         // groupsToModify = [...groupsToModify["1"],...groupsToModify["2"],...groupsToModify["3"]]

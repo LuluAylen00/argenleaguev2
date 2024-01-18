@@ -235,11 +235,27 @@ body .btn-success:hover {
 
 #main-groups #groups .top-part, #main-groups #groups .bot-part {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  /* background-color: rgba(255, 255, 255, 0.9); */
 }
+
+#main-groups #groups .top-part {
+  height: 38%;
+  background-image: url(/img/Fondo_Argenleague.png);
+  background-size: 100% 100%;
+}
+
+#main-groups #groups .top-part th {
+  padding: 5px;
+}
+
+#main-groups #groups .bot-part td {
+  padding: 2px;
+}
+ 
 
 #main-groups #groups .bot-part {
   padding-bottom: 5px;
+  background-color: rgba(0, 0, 0,0.6);
 }
 
 div.bot-part div.eachJCont {
@@ -256,6 +272,9 @@ div.bot-part h3 {
   text-align: center;
   padding-top: 7px;
   margin-bottom: 3px;
+  color: #bb9f59;
+  font-family: 'Font Awesome 6 Free';
+  font-size: medium;
 }
 
 div.bot-part td {
@@ -444,4 +463,12 @@ select#tier-selector {
   color: snow;
   background-color: black;
   border: 3px solid #bb9f59;
+}
+
+body div:where(.swal2-container) div:where(.swal2-popup) {
+  border-radius: 2px;
+  background: #545454;
+  color: #bb9f59;
+  font-size: 1rem;
+  font-family: "FontAwesome";
 }

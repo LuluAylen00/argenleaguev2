@@ -33,7 +33,10 @@ const controller = {
         res.status(200).send(result)
     },
     apiInitGroups: async function(req, res) {
-        res.send(await model.createGroupMatches(req.params.tier))
+        let data =await model.createGroupMatches(req.params.tier);
+        console.log(data); 
+        // res.send(data);
+        res.redirect('/');
     },
     apiSetWinner: async function(req, res) {
         console.log("Llegó una petición");

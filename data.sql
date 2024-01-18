@@ -196,6 +196,26 @@ INSERT INTO partidas (jugadorUnoId, jugadorDosId, fechaId, horario, draft, categ
     (null,null,2, null, null,3,4),
     (null,null,2, null, null,3,4),
     (null,null,3, null, null,3,4);
+INSERT INTO partidas (jugadorUnoId, jugadorDosId, fechaId, horario, draft, categoriaId, grupoId) VALUES (34,42,1, null, null,3,1),
+    (null,null,1, null, null,4,1),
+    (null,null,2, null, null,4,1),
+    (null,null,2, null, null,4,1),
+    (null,null,3, null, null,4,1),
+    (null,null,1, null, null,4,2),
+    (null,null,1, null, null,4,2),
+    (null,null,2, null, null,4,2),
+    (null,null,2, null, null,4,2),
+    (null,null,3, null, null,4,2),
+    (null,null,1, null, null,4,3),
+    (null,null,1, null, null,4,3),
+    (null,null,2, null, null,4,3),
+    (null,null,2, null, null,4,3),
+    (null,null,3, null, null,4,3),
+    (null,null,1, null, null,4,4),
+    (null,null,1, null, null,4,4),
+    (null,null,2, null, null,4,4),
+    (null,null,2, null, null,4,4),
+    (null,null,3, null, null,4,4);
 
 CREATE TABLE `partidasFinales` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
@@ -208,7 +228,8 @@ CREATE TABLE `partidasFinales` (
     FOREIGN KEY (`jugadorUnoId`) REFERENCES `jugadores` (`id`),
     FOREIGN KEY (`jugadorDosId`) REFERENCES `jugadores` (`id`)
 );
-INSERT INTO partidasFinales (etapaId,categoriaId) VALUES (1,1),
+INSERT INTO partidasFinales (etapaId,categoriaId) VALUES 
+    (1,1),
     (1,1),
     (1,1),
     (1,1),

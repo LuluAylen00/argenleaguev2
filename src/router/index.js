@@ -6,6 +6,8 @@ app.get("/", controller.home);
 
 app.get("/api/players/:tier", controller.apiList);
 
+app.get("/api/groups/init/:tier", controller.apiInitGroups);
+
 app.get("/api/groups/:tier", controller.apiGroups);
 
 app.post("/api/groups", controller.apiSetGroup);

@@ -159,6 +159,60 @@ function loadSeedingGroups(players, tier){
                 a.setAttribute("role","button");
                 a.innerHTML = `<i class="fas fa-pen"></i>`
                 a.addEventListener("click", ()=>{
+
+                    let grupos = [1,2,3,4]
+                    let buttonsDiv = document.createElement("div");
+
+                    async function setGroup(info){
+                        console.log(info);
+                        console.log(info);
+                        let fetching = await fetch(`/api/groups/`,{
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                id: p.id,
+                                group: info
+                            })
+                        })
+                        fetching = await fetching.json();
+
+                        if (fetching.status == 200) {
+                            // Swal.close();
+                            Swal.fire({
+                                title: `${p.nick} ahora es parte del grupo ${info}`,
+                                confirmButtonText: 'Ok',
+                            })
+                            // await updateGroups(tier)
+                            setPage();
+                        } else if (fetching.status == 400) {
+                            Swal.fire({
+                                title: `El valor ingresado (${info}) no parece ser válido`,
+                                confirmButtonText: 'Ok'
+                            })
+                        } else {
+                            Swal.fire({
+                                title: `El grupo ${info} está lleno, remueve algún integrante para seguir agregando`,
+                                confirmButtonText: 'Ok'
+                            })
+                        }
+                    }
+                    
+                    grupos.forEach(grupo => {
+                        //<button type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;">Aceptar</button>
+                        let buttonA = document.createElement("button");
+
+                        buttonA.setAttribute("type","button");
+                        buttonA.setAttribute("class","swal2-confirm swal2-styled swal2-modified button-"+grupo);
+                        buttonA.setAttribute("aria-label","");
+                        buttonA.setAttribute("style","display: inline-block;");
+                        buttonA.innerHTML = grupo;
+
+                        buttonsDiv.appendChild(buttonA);
+                    })
+
+
                     Swal.fire({
                         title: `Introduce el nuevo grupo para ${p.nick}`,
                         input: 'text',
@@ -166,43 +220,24 @@ function loadSeedingGroups(players, tier){
                         inputAttributes: {
                           autocapitalize: 'off'
                         },
+                        // showCancelButton: true,
+                        // cancelButtonText: "Cancelar",
                         showCancelButton: true,
-                        cancelButtonText: "Cancelar",
-                        confirmButtonText: 'Aceptar',
-                        showLoaderOnConfirm: true,
-                        preConfirm: async (info) => {
-                            console.log(info);
-                            let fetching = await fetch(`/api/groups/`,{
-                                method: 'POST',
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    id: p.id,
-                                    group: info
+                        cancelButtonText: 'Cancelar',
+                        html: buttonsDiv.outerHTML,
+                        didOpen: ()=>{
+                            let buttons = document.querySelectorAll(".swal2-modified");
+                                console.log(buttons);
+                                buttons.forEach((button,i) => {
+                                    button.addEventListener("click", () => {
+                                        // console.log("Click en "+button.innerHTML);
+                                        setGroup(button.innerHTML);
+                                    })
                                 })
-                            })
-                            fetching = await fetching.json();
-    
-                            if (fetching.status == 200) {
-                                Swal.fire({
-                                    title: `${p.nick} ahora es parte del grupo ${info}`,
-                                    confirmButtonText: 'Ok',
-                                })
-                                // await updateGroups(tier)
-                                setPage();
-                            } else if (fetching.status == 400) {
-                                Swal.fire({
-                                    title: `El valor ingresado (${info}) no parece ser válido`,
-                                    confirmButtonText: 'Ok'
-                                })
-                            } else {
-                                Swal.fire({
-                                    title: `El grupo ${info} está lleno, remueve algún integrante para seguir agregando`,
-                                    confirmButtonText: 'Ok'
-                                })
-                            }
                         },
+                        confirmButtonText: 'Aceptar',
+                        showLoaderOnConfirm: false,
+                        
                     })
                 })
                 aTd.appendChild(a);
