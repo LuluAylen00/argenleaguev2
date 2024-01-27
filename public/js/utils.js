@@ -353,9 +353,9 @@ function getMatches(matches) {
         [matches[0+(5*2)],matches[1+(5*2)],matches[2+(5*2)],matches[3+(5*2)],matches[4+(5*2)]],
         [matches[0+(5*3)],matches[1+(5*3)],matches[2+(5*3)],matches[3+(5*3)],matches[4+(5*3)]],
     ]
-    console.log(fechas);
+    // console.log(fechas);
     let data = fechas.map((partidasDelTier) => {
-        console.log(partidasDelTier);
+        // console.log(partidasDelTier);
         return [
             [...partidasDelTier.filter((ti) => ti.fechaId == 1)],
             [...partidasDelTier.filter((ti) => ti.fechaId == 2)],
@@ -363,7 +363,7 @@ function getMatches(matches) {
         ]
     })
 
-    console.log(data);
+    // console.log(data);
     
     return data/* .map(g => {
         let acc = [[g[0],g[1]],[g[2],g[3]],[g[4]]];

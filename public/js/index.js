@@ -15,7 +15,7 @@ function addSeedingStyles() {
     elements.forEach((elements,i) => {
         // console.log(Object.values(elements));
         Object.values(elements).forEach((activador) => {
-            console.log();
+            // console.log();
             let tableInfo = Object.values(activador.classList).includes("table-info") ? true : false
             
             activador.addEventListener('mouseover', () => {
@@ -63,7 +63,7 @@ async function loadLeftBar(players) {
     // console.log(players);
     let inv = document.getElementById("inv");
     let acc = [];
-    console.log(players);
+    // console.log(players);
     players.forEach((player) => {
         acc.push(player.semilla);
         let tr = document.createElement("tr");
@@ -164,8 +164,8 @@ function loadSeedingGroups(players, tier){
                     let buttonsDiv = document.createElement("div");
 
                     async function setGroup(info){
-                        console.log(info);
-                        console.log(info);
+                        // console.log(info);
+                        // console.log(info);
                         let fetching = await fetch(`/api/groups/`,{
                             method: 'POST',
                             headers: {
@@ -228,7 +228,7 @@ function loadSeedingGroups(players, tier){
                         html: buttonsDiv.outerHTML,
                         didOpen: ()=>{
                             let buttons = document.querySelectorAll(".swal2-modified");
-                                console.log(buttons);
+                                // console.log(buttons);
                                 buttons.forEach((button,i) => {
                                     button.addEventListener("click", () => {
                                         // console.log("Click en "+button.innerHTML);
@@ -399,7 +399,7 @@ async function updateNick(id, nick){
         })
     })
     fetching = await fetching.json();
-    console.log(fetching);
+    // console.log(fetching);
     await setPage();
     // if (fetching) {
     //     // Swal.fire(`${match.jugadorUno.nick} ha ganado!`, '', 'success')
