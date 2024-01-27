@@ -343,7 +343,7 @@ function sortTable(table) {
   }
 
 function getMatches(matches) {
-    console.log(matches);
+    // console.log(matches);
     // Array de tiers
         // Array de fechas
             // Array de matches
@@ -355,6 +355,7 @@ function getMatches(matches) {
     ]
     console.log(fechas);
     let data = fechas.map((partidasDelTier) => {
+        console.log(partidasDelTier);
         return [
             [...partidasDelTier.filter((ti) => ti.fechaId == 1)],
             [...partidasDelTier.filter((ti) => ti.fechaId == 2)],
