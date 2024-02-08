@@ -23,10 +23,10 @@ async function loadFinalPhase(data){
             }]
         } else if (match.etapaId == 4) {
             let player = { name: "TBD", winner: true, ID: 250 }
-            if (data.matches[6] ? data.matches[6].ganador : false) {
-                let players = [data.matches[6].jugadorUno, data.matches[6].jugadorDos]
-                player.name = players[data.matches[6].ganador].nick
-                player.ID = players[data.matches[6].ganador].id
+            if (data.matches[7].jugadorUno) {
+                // let players = [data.matches[7].jugadorUno, data.matches[7].jugadorDos]
+                player.name = data.matches[7].jugadorUno.nick
+                player.ID = data.matches[7].jugadorUno.id
             }
             newRounds[match.etapaId-1] = [{
                 player1: player,
@@ -40,10 +40,10 @@ async function loadFinalPhase(data){
     $(".brackets").brackets({
         titles: titles,
         rounds: newRounds,
-        color_title: 'black',
-        border_color: '#13304c',
-        color_player: '#13304c', // solid 1px rgb(75 75 75 / 30%)
-        bg_player: 'white',
+        color_title: '#1ed5ff',
+        border_color: '#1ed5ff',
+        // color_player: '#bb9f59', // solid 1px rgb(75 75 75 / 30%)
+        // bg_player: 'white',
         color_player_hover: 'white',
         bg_player_hover: '#13304c',
         border_radius_player: '4px',
@@ -76,11 +76,22 @@ async function loadFinalPhase(data){
     
                 let thead = document.createElement('thead');
                 thead.classList.add("thead-dark")
-                thead.innerHTML = `<tr><th scope="col">Clasificado</th><th scope="col">Grupo</th><th scope="col">Acción</th></tr>`
+                thead.innerHTML = `<tr><th scope="col">Clasificado</th><th scope="col">Grupo</th><th scope="col">Accion</th></tr>`
                 groupTable.appendChild(thead);
     
                 let tbody = document.createElement('tbody');
                 // console.log(group);
+                data.players.sort((p1, p2) => {
+                    // Primero comparamos por posición
+                    if (p1.scope === p2.scope) {
+                      return p1.grupoId - p2.grupoId;
+                    } else if (p1.scope === "1°") {
+                      return -1;
+                    } else {
+                      return 1;
+                    }
+                  })
+
                 data.players.forEach((p,i) => {
                     // console.log(p);
                     let tr = document.createElement('tr');
@@ -108,7 +119,7 @@ async function loadFinalPhase(data){
                     aA.innerHTML = `<i class="fas fa-pen"></i>`
                     aA.addEventListener("click", ()=>{
                         Swal.fire({
-                            title: `Que slot ocupará ${p.nick}?`,
+                            title: `Que slot ocupara ${p.nick}?`,
                             input: 'text',
                             allowOutsideClick: false,
                             inputAttributes: {
@@ -173,6 +184,101 @@ async function loadFinalPhase(data){
         })
         div.appendChild(a);
         main.appendChild(div);
+
+
+        // let roundTwoMatches = document.querySelectorAll(".rd-2 .player");
+        // console.log(roundTwoMatches);
+
+        // let roundThreeMatches = document.querySelectorAll(".rd-3 .player");
+        // console.log(roundThreeMatches);
+
+        // let roundFourMatches = document.querySelectorAll(".rd-4 .player");
+        // console.log(roundFourMatches);
+
+        let matchList = document.querySelectorAll(".match")
+        console.log(matchList);
+
+        for (let i=0;i<matchList.length;i++) {
+            let roundName = i < 4 ? "este match por Cuartos" : i < 6 ? "este match por Semis" : "La gran final"
+            matchList[i].addEventListener("dblclick", function () {
+                let m = matchList[i];
+                let match = data.matches[i];
+                console.log(match);
+                if (match.jugadorUno && match.jugadorDos) {
+                    if (i != matchList.length - 1) {
+                        Swal.fire({
+                            title: `Quien gano ${roundName}?`,
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3f47cc',
+                            denyButtonColor: '#ed1b24',
+                            confirmButtonText: match.jugadorUno.nick,
+                            denyButtonText: match.jugadorDos.nick,
+                            cancelButtonText: `Limpiar`,
+                            focusCancel: true
+                        }).then(async(result) => {
+                            if (result.isConfirmed) {
+                                let fetching = await fetch(`/api/final-phase-winner/${t}`,{
+                                    method: 'POST',
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        match: match.id,
+                                        winner: match.jugadorUno.id
+                                    })
+                                })
+                                fetching = await fetching.json();
+                                // console.log(fetching);
+                                if (fetching.status == 200) {
+                                    // Swal.fire(`${match.jugadorUno.nick} ha ganado!`, '', 'success')
+                                    await setPage();
+                                }
+                            } else if (result.isDenied) {
+                                let fetching = await fetch(`/api/final-phase-winner/${t}`,{
+                                    method: 'POST',
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        match: match.id,
+                                        winner: match.jugadorDos.id
+                                    })
+                                })
+                                fetching = await fetching.json();
+                
+                                if (fetching.status == 200) {
+                                    // Swal.fire(`${match.jugadorDos.nick} ha ganado!`, '', 'success')
+                                    await setPage();
+                                }
+                            }  else if (result.isDismissed && result.dismiss == "cancel") {
+                                let fetching = await fetch(`/api/group-phase/${t}`,{
+                                    method: 'POST',
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        match: match.id,
+                                        winner: null
+                                    })
+                                })
+                                fetching = await fetching.json();
+                
+                                if (fetching.status == 200) {
+                                    // Swal.fire(`Se ha reiniciado la partida`, '', 'info')
+                                    await setPage();
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+        
+        }
+
+        // roundTwoMatches.addEventListener("dblclick", ()=>{
+
+        // })
     }
 }
 
@@ -218,12 +324,13 @@ async function loadFinalPage() {
         }
     })
     // console.log(acc);
-
-    // console.log(playerList);
-    await loadFinalPhase({
+    let dataa = {
         players: acc,
         matches: finalInfo
-    });
+    }
+    console.log(dataa);
+    // console.log(playerList);
+    await loadFinalPhase(dataa);
     // loadLeftBar(playerList);
     // loadSeedingGroups(playerList,t);
 }

@@ -89,6 +89,59 @@ const controller = {
             //     status: 403
             // })
         // } */
+    },
+    setWinnerFinalPhase: async (req, res) => {
+        let info = await db.Final.findAll({where: {categoriaId: req.params.tier}})
+        let matchesId = info.map((match) => match.id);
+        console.log(matchesId);
+        async function nextMatch(match) {
+            let index = matchesId.indexOf(match);
+            // console.log(index);
+            // console.log(req.body);
+            try {
+                switch (index){
+                    case 0:
+                        console.log("JugadorUnoId de la partida "+info[4].id);
+                        return await db.Final.update({jugadorUnoId: req.body.winner},{where: {id:matchesId[4]}})
+                    case 1:
+                        console.log("JugadorDosId de la partida "+info[4].id);
+                        return await db.Final.update({jugadorDosId: req.body.winner},{where: {id:matchesId[4]}})
+                    case 2:
+                        console.log("JugadorUnoId de la partida "+info[5].id);
+                        return await db.Final.update({jugadorUnoId: req.body.winner},{where: {id:matchesId[5]}})
+                    case 3:
+                        console.log("JugadorDosId de la partida "+info[5].id);
+                        return await db.Final.update({jugadorDosId: req.body.winner},{where: {id:matchesId[5]}})
+                    case 4:
+                        console.log("JugadorUnoId de la partida "+info[6].id);
+                        return await db.Final.update({jugadorUnoId: req.body.winner},{where: {id:matchesId[6]}})
+                    case 5:
+                        console.log("JugadorDosId de la partida "+info[6].id);
+                        return await db.Final.update({jugadorDosId: req.body.winner},{where: {id:matchesId[6]}})
+                    case 6:
+                        console.log("JugadorUnoId de la partida "+info[7].id + " y ganador");
+                        return await db.Final.update({jugadorUnoId: req.body.winner},{where: {id:matchesId[7]}})
+                    case 7:
+                        break;
+                    default:
+                        break;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+          let updating = await nextMatch(req.body.match);
+          console.log(updating);
+          if (updating) {
+              res.send({
+                status: 200
+              })
+          } else {
+            res.send({
+                status: 400
+              })
+          }
+        // console.log(req.body);
     }
 }
 

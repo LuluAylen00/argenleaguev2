@@ -28,6 +28,8 @@ app.get('/api/final/:tier', controller.displayFinalPhase);
 
 app.patch('/api/final/set/player', controller.setFinalMatchPlayer);
 
+app.post("/api/final-phase-winner/:tier", controller.setWinnerFinalPhase);
+
 app.use((req,res,next) => {
     return res.redirect("/");
 })
