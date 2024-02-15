@@ -252,14 +252,14 @@ async function loadFinalPhase(data){
                                     await setPage();
                                 }
                             }  else if (result.isDismissed && result.dismiss == "cancel") {
-                                let fetching = await fetch(`/api/group-phase/${t}`,{
+                                let fetching = await fetch(`/api/final-phase-winner/${t}`,{
                                     method: 'POST',
                                     headers: {
                                         "Content-Type": "application/json",
                                     },
                                     body: JSON.stringify({
                                         match: match.id,
-                                        winner: null
+                                        winner: null 
                                     })
                                 })
                                 fetching = await fetching.json();

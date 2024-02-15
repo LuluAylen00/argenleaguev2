@@ -498,10 +498,10 @@ body div:where(.swal2-container).swal2-backdrop-show {
   background-color: rgba(0,0,0,0.7);
 }
 
-#finalPhase {
+/* #finalPhase {
   color: gray!important;
   cursor: default;
-}
+} */
 
 .brackets {
   width: 100%;

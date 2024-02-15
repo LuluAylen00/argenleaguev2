@@ -453,7 +453,7 @@ document.getElementById("groupPhase").addEventListener("click", ()=>{
     insertParam('p', "groups")
     setPage();
 })
-// document.getElementById("finalPhase").addEventListener("click", ()=>{
-//     insertParam('p', "final")
-//     setPage();
-// })
+document.getElementById("finalPhase").addEventListener("click", ()=>{
+    insertParam('p', "final")
+    setPage();
+})
